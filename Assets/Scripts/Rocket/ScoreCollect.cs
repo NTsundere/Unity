@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ScoreCollect : MonoBehaviour
@@ -9,6 +10,8 @@ public class ScoreCollect : MonoBehaviour
         {
             Score += 1;
             Destroy(gameObject);
+
+            RocketEventNotification.OnScoreChanged();
         }
     }
 }

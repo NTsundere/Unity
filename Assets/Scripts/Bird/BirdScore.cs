@@ -11,9 +11,13 @@ public class BirdScore : MonoBehaviour
     private void Start()
     {
         _text = GetComponent<TMP_Text>();
+
+        BirdEventNotification.ScoreChanged += ScoreUpdate;
     }
-    private void Update()
+
+    private void ScoreUpdate()
     {
         _text.text = _birdMover.Score.ToString();
     }
+
 }

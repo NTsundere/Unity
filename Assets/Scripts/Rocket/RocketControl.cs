@@ -8,6 +8,8 @@ public class RocketControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        RocketEventNotification.Died += Die;
     }
 
     // Update is called once per frame
@@ -18,5 +20,14 @@ public class RocketControl : MonoBehaviour
 
         rb.AddRelativeForce(0, 0, forwardForce);
         rb.AddRelativeTorque(0, sideForce, 0);
+    }
+
+
+    private void Die()
+    {
+        if (TryGetComponent<RocketControl>(out RocketControl control))
+        {
+            Destroy(control);
+        }
     }
 }

@@ -14,11 +14,11 @@ public class SailHandler : MonoBehaviour
     private float _defaultShipSpeed = 5f;
     private float _wind;
     private float _targetSailAngle;
-
+    private float _shipSpeed;
 
     private void Start()
     {
-        
+        SailedShipEventNotification.SpeedChanged += DrawShipSpeed;
     }
 
     private void Update()
@@ -49,8 +49,14 @@ public class SailHandler : MonoBehaviour
 
         // Применение скорости корабля
         float shipSpeed = _defaultShipSpeed * efficiency;
-        _shipSpeedText.text = $"Скорость: {shipSpeed:F1}";
+        _shipSpeed = shipSpeed;
+        SailedShipEventNotification.OnSpeedChanged();
         rb.AddForce(_ship.forward * shipSpeed * 100 * Time.deltaTime);
+    }
+
+    private void DrawShipSpeed()
+    {
+        _shipSpeedText.text = $"Скорость: {_shipSpeed:F1}";
     }
 
     // Управление вращением корабля

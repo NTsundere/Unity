@@ -5446,7 +5446,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _force: 300
-  _restartWindow: {fileID: 295844678}
+  _restartWindow: {fileID: 295844681}
 --- !u!96 &333812314
 TrailRenderer:
   serializedVersion: 3

@@ -9,10 +9,12 @@ public class RocketHealth : MonoBehaviour
     public void Add(float amount)
     {
         _health += amount;
+        RocketEventNotification.OnHealthChanged();
     }
 
     public void Reduce(float amount)
     {
         _health -= amount;
+        RocketEventNotification.OnHealthChanged();
     }
 }

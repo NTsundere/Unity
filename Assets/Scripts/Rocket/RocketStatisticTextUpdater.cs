@@ -6,9 +6,11 @@ public class RocketStatisticTextUpdater : MonoBehaviour
     [SerializeField] private TMP_Text _scoreText;
     [SerializeField] private TMP_Text _healthText;
     [SerializeField] private RocketHealth _rocketHealth;
-    private void Update()
+
+    private void Start()
     {
-        RedrawText();
+        RocketEventNotification.ScoreChanged += RedrawText;
+        RocketEventNotification.HealthChanged += RedrawText;
     }
 
     private void RedrawText()
@@ -19,4 +21,5 @@ public class RocketStatisticTextUpdater : MonoBehaviour
             _healthText.text = $"Health: " + _rocketHealth.Health.ToString();
         }
     }
+
 }

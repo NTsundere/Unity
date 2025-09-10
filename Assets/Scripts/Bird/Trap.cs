@@ -6,7 +6,7 @@ public class Trap : MonoBehaviour
     {
         if (other.TryGetComponent<BirdMover>(out BirdMover birdMover))
         {
-            birdMover.Die();
+            BirdEventNotification.OnDied();
         }
     }
 }

@@ -9,11 +9,12 @@ public class RocketTrap : MonoBehaviour
         {
             if (rocketHealth.Health <= 0)
             {
-                Destroy(rocketControl);
+                RocketEventNotification.OnDied();
             }
             else
             {
                 rocketHealth.Reduce(_damage);
+
             }
             Destroy(gameObject);
         }

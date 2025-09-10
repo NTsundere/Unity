@@ -2,36 +2,40 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BirdMover : MonoBehaviour
+public partial class BirdMover : MonoBehaviour
 { 
     [SerializeField] private float _force = 900;
-    [SerializeField] private GameObject _restartWindow;
+    [SerializeField] private Canvas _restartWindow;
+
     private Rigidbody _birdrb;
+
     private float _score = 0f;
+    private bool _isDied = false;
 
     public float Score => _score; 
-
-    public event Action ScoreChanged;
 
     private void Start()
     {
         _birdrb = GetComponent<Rigidbody>();
-        _restartWindow.SetActive(false);
+        _restartWindow.enabled = false;
+
+        BirdEventNotification.Died += Die;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && gameObject != null) {
+        if (Input.GetKeyDown(KeyCode.Space) && gameObject != null && _isDied == false) {
             _birdrb.AddForce(0, _force, 0);
             _score += 1;
-            ScoreChanged?.Invoke();
+
+            BirdEventNotification.OnScoreChanged();
         }
         
     }
 
-    public void Die()
+    private void Die()
     {
-        _restartWindow.SetActive(true);
-        Destroy(transform.gameObject);
+        _restartWindow.enabled = true;
+        _isDied = true;
     }
 }
